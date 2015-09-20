@@ -36,7 +36,9 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSV\CsvReaderWriter.cs" />
+    <Compile Include="CSV\CsvWriter.cs" />
+    <Compile Include="CSV\CsvReader.cs" />
+    <Compile Include="CSV\ICsvReader.cs" />
     <Compile Include="QuoteExporter.cs" />
     <Compile Include="QuoteImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

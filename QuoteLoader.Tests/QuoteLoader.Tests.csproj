@@ -39,8 +39,10 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSV\CsvReaderWriterTests.cs" />
+    <Compile Include="CSV\CsvWriterTests.cs" />
+    <Compile Include="CSV\CsvReaderTests.cs" />
     <Compile Include="QuoteExporterTests.cs" />
+    <Compile Include="FakeQuoteRepository.cs" />
     <Compile Include="QuoteImporterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
