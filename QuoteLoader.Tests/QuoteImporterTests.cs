@@ -1,7 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace QuoteLoader.Tests
-{
+{	
 	using System;
 	using System.IO;
 	using System.Linq;
