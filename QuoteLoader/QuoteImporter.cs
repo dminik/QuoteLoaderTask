@@ -83,7 +83,7 @@ namespace QuoteLoader
 
 			try
 			{
-				quote.Value = double.Parse(values[2], CultureInfo.InvariantCulture);
+				quote.ValueExact = decimal.Parse(values[2], CultureInfo.InvariantCulture);
 			}
 			catch (Exception ex)
 			{
