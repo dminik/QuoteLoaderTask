@@ -1,12 +1,10 @@
 ﻿using NUnit.Framework;
 using System.Linq;
+using System.IO;
+using QuoteLoader.CSV;
 
 namespace QuoteLoader.Tests.CSV
 {
-	using System.IO;
-
-	using QuoteLoader.CSV;
-
 	[TestFixture]
 	public class CsvWriterTests
 	{		

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CSV\CsvWriterTests.cs" />
     <Compile Include="CSV\CsvReaderTests.cs" />
+    <Compile Include="StreamHelper.cs" />
     <Compile Include="QuoteExporterTests.cs" />
     <Compile Include="FakeQuoteRepository.cs" />
     <Compile Include="QuoteImporterTests.cs" />

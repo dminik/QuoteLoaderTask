@@ -7,17 +7,17 @@ namespace QuoteLoader.Tests
 	internal class FakeQuoteRepository : IQuoteRepository
 	{
 		internal int Count = 0;
-		private List<Quote> _data = new List<Quote>();
+		public List<Quote> Data = new List<Quote>();
 
 		public void AddQuote(Quote quote)
 		{
 			quote.Id = ++Count;
-			_data.Add(quote);
+			Data.Add(quote);
 		}
 
 		public IEnumerable<Quote> GetQuotes(DateTime start, DateTime end)
 		{
-			return _data;
+			return Data;
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace QuoteLoader.Tests
 	public class QuoteExporterTests
 	{
 		[Test]
-		public void Export_TwoLines_Success()
+		public void Export_RealFile_Success()
 		{
 			// Arrange
 			var repository = new FakeQuoteRepository();

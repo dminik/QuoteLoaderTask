@@ -35,8 +35,10 @@ namespace QuoteLoader.CSV
 
 				StringSplitOptions opt = StringSplitOptions.RemoveEmptyEntries;
 				if (line != null)
+				{
 					values = line.Split(new string[] { _delimiter.ToString() }, opt);
-
+				}
+				
 				return true;
 			}
 			

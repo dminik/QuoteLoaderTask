@@ -5,7 +5,9 @@ using QuoteLoader.CSV;
 using Quotes;
 
 namespace QuoteLoader
-{	
+{
+	using System.IO;
+
 	public class QuoteImporter
 	{
 		private readonly IQuoteRepository _quoteRepository;
@@ -19,19 +21,34 @@ namespace QuoteLoader
 		{
 			using (var csv = new CsvReader(inputFileName))
 			{		        		        
-				string[] values;
-				int lineNumber = 0;
+				DoImport(csv);
+			}
+		}
 
-				while (csv.Read(out values))
+		internal void Import(StreamReader stream)
+		{
+			using (var csv = new CsvReader(stream))
+			{
+				DoImport(csv);
+			}
+		}
+
+		private void DoImport(CsvReader csv)
+		{
+			string[] values;
+			int lineNumber = 0;
+
+			while (csv.Read(out values))
+			{
+				lineNumber++;
+
+				if (!values.Any()) // skip empty line
 				{
-					lineNumber++;
-
-					if(!values.Any()) // skip empty line
-						continue;
-
-					var item = Parse(values, lineNumber);
-					_quoteRepository.AddQuote(item);
+					continue;
 				}
+
+				var item = Parse(values, lineNumber);
+				_quoteRepository.AddQuote(item);
 			}
 		}
 
@@ -42,7 +59,7 @@ namespace QuoteLoader
 			if (values.Count() != FIELD_NUMBER)
 			{
 				var str = string.Join(", ", values);
-				throw new Exception(
+				throw new FormatException(
 					string.Format(
 						"Wrong fields number in line {0}. Expected {1} but was found {2}. Fields: {3}",
 						lineNumber,
@@ -54,12 +71,12 @@ namespace QuoteLoader
 			var quote = new Quote();
 			
 			try
-			{
-				quote.DateTime = DateTime.ParseExact(values[0], "s", CultureInfo.InvariantCulture);
+			{				
+				quote.DateTime = DateTime.ParseExact(values[0].Trim(), "s", CultureInfo.InvariantCulture);
 			}
 			catch (Exception ex)
 			{
-				throw new FormatException(string.Format("Can't parse field 'DateTime' from string {0} to type 'DateTime'.", values[0]), ex);				
+				throw new FormatException(string.Format("Can't parse field 'DateTime' from string '{0}' to type 'DateTime'.", values[0]), ex);				
 			}
 			
 			quote.Ticker = values[1];
@@ -70,7 +87,7 @@ namespace QuoteLoader
 			}
 			catch (Exception ex)
 			{
-				throw new FormatException(string.Format("Can't parse field 'Value' from string {0} to type 'double'.", values[0]), ex);
+				throw new FormatException(string.Format("Can't parse field 'Value' from string '{0}' to type 'double'.", values[2]), ex);
 			}
 			
 			return quote;

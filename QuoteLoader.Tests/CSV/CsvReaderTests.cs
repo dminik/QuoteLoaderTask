@@ -36,7 +36,7 @@ namespace QuoteLoader.Tests.CSV
 		{
 			// Arrange
 			var str = "123 4567 \n abc grs  ";
-			var stream = GenerateStreamFromString(str);
+			var stream = str.ToStream();
 
 			// Act			
 			using (var reader = new CsvReader(stream, ' '))
@@ -60,16 +60,6 @@ namespace QuoteLoader.Tests.CSV
 
 				reader.Close();
 			}
-		}
-
-		StreamReader GenerateStreamFromString(string s)
-		{
-			var stream = new MemoryStream();
-			var writer = new StreamWriter(stream);
-			writer.Write(s);
-			writer.Flush();
-			stream.Position = 0;
-			return new StreamReader(stream);
-		}
+		}		
 	}
 }
