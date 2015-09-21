@@ -24,9 +24,8 @@ namespace QuoteLoader.Tests.CSV
 		{
 			using (var reader = new CsvReader(@"..\..\SampleData\quotes.txt"))
 			{
-				string[] values;
-				var isRead = reader.Read(out values);
-				Assert.IsTrue(isRead);
+			    var values = reader.Read();				
+                Assert.IsNotNull(values);
 				Assert.IsTrue(values.Any());
 			}
 		}
@@ -42,21 +41,21 @@ namespace QuoteLoader.Tests.CSV
 			using (var reader = new CsvReader(stream, ' '))
 			{
 				// Assert
-				string[] values;
-				var isRead = reader.Read(out values);
-				Assert.IsTrue(isRead);
+				string[] values = null;
+                values = reader.Read();
+                Assert.IsNotNull(values);
 				Assert.AreEqual(2, values.Count());
 				Assert.AreEqual("123", values[0]);
 				Assert.AreEqual("4567", values[1]);
 
-				isRead = reader.Read(out values);
-				Assert.IsTrue(isRead);
+                values = reader.Read();
+                Assert.IsNotNull(values);
 				Assert.AreEqual(2, values.Count());
 				Assert.AreEqual("abc", values[0]);
 				Assert.AreEqual("grs", values[1]);
 
-				isRead = reader.Read(out values);
-				Assert.IsFalse(isRead);
+                values = reader.Read();
+                Assert.IsNull(values);
 
 				reader.Close();
 			}

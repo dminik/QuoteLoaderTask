@@ -38,7 +38,7 @@
   <ItemGroup>
     <Compile Include="CSV\CsvWriter.cs" />
     <Compile Include="CSV\CsvReader.cs" />
-    <Compile Include="CSV\ICsvReader.cs" />
+    <Compile Include="IReader.cs" />
     <Compile Include="QuoteExporter.cs" />
     <Compile Include="QuoteImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

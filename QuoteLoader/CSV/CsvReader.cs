@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace QuoteLoader.CSV
 {	
-	public class CsvReader : ICsvReader, IDisposable
+	public class CsvReader : IReader, IDisposable
 	{
 		private StreamReader _reader;
 		private bool _disposed;
@@ -25,24 +26,21 @@ namespace QuoteLoader.CSV
 			_reader = stream;
 		}
 
-		public bool Read(out string[] values)
+        public string[] Read()
 		{
-			values = new string[0];
+            var values = new string[0];
 
 			if (_reader.Peek() > -1)
 			{
 				var line = _reader.ReadLine();
-
-				StringSplitOptions opt = StringSplitOptions.RemoveEmptyEntries;
-				if (line != null)
-				{
-					values = line.Split(new string[] { _delimiter.ToString() }, opt);
-				}
 				
-				return true;
+				if (line != null)				
+                    values = line.Split(new string[] { _delimiter.ToString() }, StringSplitOptions.RemoveEmptyEntries);				
+
+                return values;
 			}
 			
-			return false;			
+			return null;			
 		}
 
 		public void Close()

@@ -8,7 +8,7 @@ namespace Quotes
 		public string Ticker { get; set; }
 		public DateTime DateTime { get; set; }
 
-		[Obsolete("This propery is obsolete; use prperty ValueExact instead")]
+		[Obsolete("This propery is obsolete; use property ValueExact instead")]
 		public double Value
 		{
 			get

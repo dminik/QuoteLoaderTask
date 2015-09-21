@@ -5,18 +5,17 @@ using QuoteLoader.CSV;
 using Quotes;
 
 namespace QuoteLoader
-{
-	using System.IO;
-
+{	
 	public class QuoteImporter
 	{
 		private readonly IQuoteRepository _quoteRepository;
-
+                
 		public QuoteImporter(IQuoteRepository quoteRepository)
 		{
 			_quoteRepository = quoteRepository;
 		}
 
+        [Obsolete("This method is obsolete; use method 'public Import(ICsvReader reader)' instead")]
 		public void Import(string inputFileName)
 		{
 			using (var csv = new CsvReader(inputFileName))
@@ -25,20 +24,17 @@ namespace QuoteLoader
 			}
 		}
 
-		internal void Import(StreamReader stream)
-		{
-			using (var csv = new CsvReader(stream))
-			{
-				DoImport(csv);
-			}
-		}
-
-		private void DoImport(CsvReader csv)
+        public void Import(IReader reader)
+        {            
+            DoImport(reader);         
+        }
+	
+		private void DoImport(IReader quote)
 		{
 			string[] values;
 			int lineNumber = 0;
 
-			while (csv.Read(out values))
+            while ((values = quote.Read()) != null)
 			{
 				lineNumber++;
 

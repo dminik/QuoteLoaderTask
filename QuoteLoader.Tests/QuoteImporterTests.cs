@@ -1,14 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using Moq;
 using NUnit.Framework;
+using QuoteLoader.CSV;
+using Quotes;
 
 namespace QuoteLoader.Tests
-{	
-	using System;
-	using System.IO;
-	using System.Linq;
-
-	using QuoteLoader.CSV;
-
+{			
 	[TestFixture]
 	public class QuoteImporterTests
 	{
@@ -24,31 +22,37 @@ namespace QuoteLoader.Tests
 
 			// Assert
 			Assert.AreEqual(1000, repository.Count, "Invalid count of records imported!");
-		}  
-	  
+		}
+        
 		[Test]
 		public void Import_TwoLines_Success()
 		{
-			// Arrange
-			var str = "2015-08-26T13:04:32	ABCD	228.34 \n\n 2015-08-26T13:04:33	QWER	228.35";
-			var stream = str.ToStream();
+			// Arrange			
+			var repositoryMock = new Mock<IQuoteRepository>();
 
-			var repository = new FakeQuoteRepository();
-			var importer = new QuoteImporter(repository);
+            var mockReader = new Mock<IReader>();
 
+            var linesQueue = new Queue<string[]>();
+            linesQueue.Enqueue(new[] { "2015-08-26T13:04:32", "ABCD", "228.34" });
+            linesQueue.Enqueue(new[] { "2015-08-26T13:04:33", "QWER", "228.35" });
+            linesQueue.Enqueue(null);
+            mockReader.Setup(x => x.Read()).Returns(linesQueue.Dequeue);
+            
+			var importer = new QuoteImporter(repositoryMock.Object);
+		    
 			// Act
-			importer.Import(stream);
+            importer.Import(mockReader.Object);
 
-			// Assert
-			Assert.AreEqual(2, repository.Count, "Invalid count of records imported!");
+			// Assert            
+            repositoryMock.Verify(foo => foo.AddQuote(It.Is<Quote>(s =>
+                   s.DateTime == new DateTime(2015, 8, 26, 13, 4, 32)
+                && s.Ticker == "ABCD"
+                && s.ValueExact == (decimal)228.34)));
 
-			Assert.AreEqual(new DateTime(2015, 8, 26, 13, 4, 32), repository.Data[0].DateTime);
-			Assert.AreEqual("ABCD", repository.Data[0].Ticker);
-			Assert.AreEqual((double) 228.34, repository.Data[0].ValueExact);
-
-			Assert.AreEqual(new DateTime(2015, 8, 26, 13, 4, 33), repository.Data[1].DateTime);
-			Assert.AreEqual("QWER", repository.Data[1].Ticker);
-			Assert.AreEqual((double) 228.35, repository.Data[1].ValueExact);				
+            repositoryMock.Verify(foo => foo.AddQuote(It.Is<Quote>(s =>
+                   s.DateTime == new DateTime(2015, 8, 26, 13, 4, 33)
+                && s.Ticker == "QWER"
+                && s.ValueExact == (decimal)228.35)));	
 		}
 
 		[Test]
@@ -61,9 +65,10 @@ namespace QuoteLoader.Tests
 
 			var repository = new FakeQuoteRepository();
 			var importer = new QuoteImporter(repository);
+            var csv = new CsvReader(stream);
 
 			// Act
-			importer.Import(stream);
+            importer.Import(csv);
 		}
 
 		[Test]
@@ -76,9 +81,10 @@ namespace QuoteLoader.Tests
 
 			var repository = new FakeQuoteRepository();
 			var importer = new QuoteImporter(repository);
+            var csv = new CsvReader(stream);
 
-			// Act
-			importer.Import(stream);
+            // Act
+            importer.Import(csv);
 		}
 
 		[Test]
@@ -91,9 +97,10 @@ namespace QuoteLoader.Tests
 
 			var repository = new FakeQuoteRepository();
 			var importer = new QuoteImporter(repository);
+            var csv = new CsvReader(stream);
 
-			// Act
-			importer.Import(stream);
+            // Act
+            importer.Import(csv);
 		}  	
 	}
 }
