@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace QuoteLoader.CSV
 {	
-	public class CsvReader : IReader, IDisposable
+	public class CsvReader : IReader
 	{
 		private StreamReader _reader;
 		private bool _disposed;

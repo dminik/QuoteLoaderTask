@@ -35,30 +35,32 @@ namespace QuoteLoader.Tests.CSV
 		{
 			// Arrange
 			var str = "123 4567 \n abc grs  ";
-			var stream = str.ToStream();
 
-			// Act			
-			using (var reader = new CsvReader(stream, ' '))
-			{
-				// Assert
-				string[] values = null;
-                values = reader.Read();
-                Assert.IsNotNull(values);
-				Assert.AreEqual(2, values.Count());
-				Assert.AreEqual("123", values[0]);
-				Assert.AreEqual("4567", values[1]);
+		    using (var stream = str.ToStream())
+		    {
+		        // Act			
+		        using (var reader = new CsvReader(stream, ' '))
+		        {
+		            // Assert
+		            string[] values = null;
+		            values = reader.Read();
+		            Assert.IsNotNull(values);
+		            Assert.AreEqual(2, values.Count());
+		            Assert.AreEqual("123", values[0]);
+		            Assert.AreEqual("4567", values[1]);
 
-                values = reader.Read();
-                Assert.IsNotNull(values);
-				Assert.AreEqual(2, values.Count());
-				Assert.AreEqual("abc", values[0]);
-				Assert.AreEqual("grs", values[1]);
+		            values = reader.Read();
+		            Assert.IsNotNull(values);
+		            Assert.AreEqual(2, values.Count());
+		            Assert.AreEqual("abc", values[0]);
+		            Assert.AreEqual("grs", values[1]);
 
-                values = reader.Read();
-                Assert.IsNull(values);
+		            values = reader.Read();
+		            Assert.IsNull(values);
 
-				reader.Close();
-			}
+		            reader.Close();
+		        }
+		    }
 		}		
 	}
 }

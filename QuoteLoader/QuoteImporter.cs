@@ -29,19 +29,14 @@ namespace QuoteLoader
             DoImport(reader);         
         }
 	
-		private void DoImport(IReader quote)
+		private void DoImport(IReader reader)
 		{
 			string[] values;
 			int lineNumber = 0;
 
-            while ((values = quote.Read()) != null)
+            while ((values = reader.Read()) != null)
 			{
-				lineNumber++;
-
-				if (!values.Any()) // skip empty line
-				{
-					continue;
-				}
+				lineNumber++;				
 
 				var item = Parse(values, lineNumber);
 				_quoteRepository.AddQuote(item);

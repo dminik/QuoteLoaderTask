@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Moq;
 using NUnit.Framework;
-using QuoteLoader.CSV;
 using Quotes;
 
 namespace QuoteLoader.Tests
@@ -37,7 +36,7 @@ namespace QuoteLoader.Tests
 			// Arrange						
             var testLinesFields = new List<string[]>()
             {
-                new[] { "2015-08-26T13:04:32", "ABCD", "228.34" },
+                new[] { "2015-08-26T13:04:32", "ABCD", "228.34" },                
                 new[] { "2015-08-26T13:04:33", "QWER", "228.35" },                
             };
 
