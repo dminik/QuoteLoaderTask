@@ -1,6 +1,6 @@
 using System;
 
-namespace QuoteLoader
+namespace QuoteLoader.StorageProviders
 {
 	public interface IWriter : IDisposable
 	{

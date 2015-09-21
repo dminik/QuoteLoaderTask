@@ -1,6 +1,6 @@
 using Quotes;
 
-namespace QuoteLoader
+namespace QuoteLoader.Formatters
 {
 	public interface IQuoteFormatter
 	{

@@ -1,8 +1,10 @@
 ﻿using Moq;
+
 using NUnit.Framework;
+
 using Quotes;
 
-namespace QuoteLoader.Tests
+namespace QuoteLoader.Tests.ExportersImportersFasade
 {			
 	[TestFixture]
 	public class QuoteImporterTests

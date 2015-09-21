@@ -1,12 +1,18 @@
-﻿using NUnit.Framework;
-using Quotes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using Moq;
 
-namespace QuoteLoader.Tests
+using NUnit.Framework;
+
+using QuoteLoader.Formatters;
+using QuoteLoader.StorageProviders;
+
+using Quotes;
+
+namespace QuoteLoader.Tests.ExportersImportersFasade
 {
 	[TestFixture]
 	public class QuoteExporterTests

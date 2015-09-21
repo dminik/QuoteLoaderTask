@@ -1,4 +1,8 @@
 ﻿using System;
+
+using QuoteLoader.Formatters;
+using QuoteLoader.StorageProviders;
+
 using Quotes;
 
 namespace QuoteLoader

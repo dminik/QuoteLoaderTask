@@ -1,12 +1,13 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
 using System.Linq;
 
-namespace QuoteLoader.Tests.CSV
+using NUnit.Framework;
+
+using QuoteLoader.CSV;
+using QuoteLoader.Tests.Helpers;
+
+namespace QuoteLoader.Tests.StorageProviders.CSV
 {
-	using System.IO;
-
-	using QuoteLoader.CSV;
-
 	[TestFixture]
 	public class CsvReaderTests
 	{

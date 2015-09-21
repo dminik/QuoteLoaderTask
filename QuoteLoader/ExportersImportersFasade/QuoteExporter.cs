@@ -1,6 +1,7 @@
 ﻿using System;
 using QuoteLoader.CSV;
 using QuoteLoader.Formatters;
+using QuoteLoader.StorageProviders;
 
 using Quotes;
 

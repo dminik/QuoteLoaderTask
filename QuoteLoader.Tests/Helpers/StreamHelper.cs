@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace QuoteLoader.Tests
+namespace QuoteLoader.Tests.Helpers
 {
 	public static class StreamHelper
 	{

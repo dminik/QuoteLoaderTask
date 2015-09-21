@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 
+using QuoteLoader.StorageProviders;
+
 namespace QuoteLoader.CSV
 {
 	public class CsvWriter : IWriter

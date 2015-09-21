@@ -43,13 +43,13 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSV\CsvWriterTests.cs" />
-    <Compile Include="CSV\CsvReaderTests.cs" />
-    <Compile Include="QuoteImporterTests.cs" />
-    <Compile Include="QuoteFormatterTests.cs" />
-    <Compile Include="StreamHelper.cs" />
-    <Compile Include="QuoteExporterTests.cs" />
-    <Compile Include="QuoteImporterBaseTests.cs" />
+    <Compile Include="StorageProviders\CSV\CsvWriterTests.cs" />
+    <Compile Include="StorageProviders\CSV\CsvReaderTests.cs" />
+    <Compile Include="ExportersImportersFasade\QuoteImporterTests.cs" />
+    <Compile Include="Formatters\QuoteFormatterTests.cs" />
+    <Compile Include="Helpers\StreamHelper.cs" />
+    <Compile Include="ExportersImportersFasade\QuoteExporterTests.cs" />
+    <Compile Include="ExportersImportersFasade\QuoteImporterBaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

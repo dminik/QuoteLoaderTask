@@ -36,15 +36,15 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CSV\CsvWriter.cs" />
-    <Compile Include="CSV\CsvReader.cs" />
-    <Compile Include="IWriter.cs" />
-    <Compile Include="IQuoteFormatter.cs" />
-    <Compile Include="IReader.cs" />
-    <Compile Include="QuoteExporter.cs" />
+    <Compile Include="StorageProviders\CSV\CsvWriter.cs" />
+    <Compile Include="StorageProviders\CSV\CsvReader.cs" />
+    <Compile Include="StorageProviders\IWriter.cs" />
+    <Compile Include="Formatters\IQuoteFormatter.cs" />
+    <Compile Include="StorageProviders\IReader.cs" />
+    <Compile Include="ExportersImportersFasade\QuoteExporter.cs" />
     <Compile Include="Formatters\QuoteFormatter.cs" />
     <Compile Include="QuoteImporterBase.cs" />
-    <Compile Include="QuoteImporter.cs" />
+    <Compile Include="ExportersImportersFasade\QuoteImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

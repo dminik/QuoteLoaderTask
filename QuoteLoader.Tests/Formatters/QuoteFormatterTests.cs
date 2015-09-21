@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using Moq;
+
 using NUnit.Framework;
 
 using QuoteLoader.Formatters;
 
 using Quotes;
 
-namespace QuoteLoader.Tests
+namespace QuoteLoader.Tests.Formatters
 {			
 	[TestFixture]
 	public class QuoteFormatterTests
