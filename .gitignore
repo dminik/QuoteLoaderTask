@@ -2,7 +2,6 @@
 *.ncrunchproject
 *.obj
 *.pdb
-*.user
 *.aps
 *.pch
 *.vspscc
