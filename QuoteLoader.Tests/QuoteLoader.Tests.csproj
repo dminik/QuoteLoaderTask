@@ -45,10 +45,11 @@
   <ItemGroup>
     <Compile Include="CSV\CsvWriterTests.cs" />
     <Compile Include="CSV\CsvReaderTests.cs" />
-    <Compile Include="QuoteParserTests.cs" />
+    <Compile Include="QuoteImporterTests.cs" />
+    <Compile Include="QuoteFormatterTests.cs" />
     <Compile Include="StreamHelper.cs" />
     <Compile Include="QuoteExporterTests.cs" />
-    <Compile Include="QuoteImporterTests.cs" />
+    <Compile Include="QuoteImporterBaseTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -91,7 +91,6 @@ namespace QuoteLoader.Tests
 
 			// Act	
 			var quote = parser.FromString(line, 1);
-		}
-		
+		}		
 	}
 }
