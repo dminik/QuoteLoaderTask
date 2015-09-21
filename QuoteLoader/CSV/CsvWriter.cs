@@ -3,7 +3,7 @@ using System.IO;
 
 namespace QuoteLoader.CSV
 {
-	public class CsvWriter : IDisposable
+	public class CsvWriter : IWriter
 	{		
 		private StreamWriter _writer;
 

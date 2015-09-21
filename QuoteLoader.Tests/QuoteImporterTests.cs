@@ -46,11 +46,11 @@ namespace QuoteLoader.Tests
 			var mockReader = CreateMockReader(testLinesFields);
 			var importer = new QuoteImporter(_repositoryMock.Object);
 
-			var parser = new Mock<IQuoteParser>();
-			parser.Setup(foo => foo.Parse(It.IsAny<string[]>(), It.IsAny<int>())).Returns(new Quote());
+			var formatter = new Mock<IQuoteFormatter>();
+			formatter.Setup(foo => foo.FromString(It.IsAny<string[]>(), It.IsAny<int>())).Returns(new Quote());
 			
 			// Act
-			importer.Import(mockReader.Object, parser.Object);
+			importer.Import(mockReader.Object, formatter.Object);
 
 			// Assert            
 			_repositoryMock.Verify(foo => foo.AddQuote(It.IsAny<Quote>()), Times.Exactly(2));	
@@ -62,15 +62,15 @@ namespace QuoteLoader.Tests
 		{
 			// Arrange						
 			var importer = new QuoteImporter(_repositoryMock.Object);
-			var parser = new Mock<IQuoteParser>();
+			var formatter = new Mock<IQuoteFormatter>();
 			
 			// Act
-			importer.Import(null, parser.Object);
+			importer.Import(null, formatter.Object);
 		}
 
 		[Test]
 		[ExpectedException(typeof(ArgumentNullException))]
-		public void Import_ParserParamIsNull_ThrowException()
+		public void Import_FormatterParamIsNull_ThrowException()
 		{
 			// Arrange						
 			var mockReader = CreateMockReader(new List<string[]>());
@@ -79,8 +79,7 @@ namespace QuoteLoader.Tests
 			// Act
 			importer.Import(mockReader.Object, null);
 		}
-
-				
+		
 		private static Mock<IReader> CreateMockReader(List<string[]> testLinesFields)
 		{
 			var mockReader = new Mock<IReader>();

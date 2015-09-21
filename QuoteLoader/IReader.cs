@@ -2,8 +2,8 @@
 
 namespace QuoteLoader
 {
-    public interface IReader : IDisposable
+	public interface IReader : IDisposable
 	{
-        string[] Read();
+		string[] Read();
 	}
 }

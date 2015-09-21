@@ -38,10 +38,11 @@
   <ItemGroup>
     <Compile Include="CSV\CsvWriter.cs" />
     <Compile Include="CSV\CsvReader.cs" />
-    <Compile Include="IQuoteParser.cs" />
+    <Compile Include="IWriter.cs" />
+    <Compile Include="IQuoteFormatter.cs" />
     <Compile Include="IReader.cs" />
     <Compile Include="QuoteExporter.cs" />
-    <Compile Include="QuoteParser.cs" />
+    <Compile Include="Formatters\QuoteFormatter.cs" />
     <Compile Include="QuoteImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Globalization;
 using QuoteLoader.CSV;
+using QuoteLoader.Formatters;
+
 using Quotes;
 
 namespace QuoteLoader
@@ -8,36 +9,45 @@ namespace QuoteLoader
 	public class QuoteExporter
 	{
 		private readonly IQuoteRepository _quoteRepository;
+		private IQuoteFormatter _formatter;
 
 		public QuoteExporter(IQuoteRepository quoteRepository)
 		{
 			_quoteRepository = quoteRepository;
 		}
 
-		public void Export(string exportFileName, DateTime start, DateTime end)
+		public IQuoteFormatter Formatter
 		{
-			var quotes = _quoteRepository.GetQuotes(start, end);
-
-			using (var csv = new CsvWriter(exportFileName))
-			{
-				foreach (var quote in quotes)
-				{
-					var data = ToArray(quote);
-					csv.Write(data);
-				}
-			}
+			set { _formatter = value; }
 		}
 
-		private static string[] ToArray(Quote quote)
+		[Obsolete("This method is obsolete; use method public Export(string exportFileName, DateTime start, DateTime end) instead")]
+		public void Export(string exportFileName, DateTime start, DateTime end)
 		{
-			var data = new string[]
-			{				
-				quote.DateTime.ToString("s", CultureInfo.InvariantCulture),
-				quote.Ticker,
-				quote.ValueExact.ToString("F2", CultureInfo.InvariantCulture),
-			};
+			using (var writer = new CsvWriter(exportFileName))
+			{
+				DoExport(writer, start, end);
+			}			
+		}
 
-			return data;
+		public void Export(IWriter writer, IQuoteFormatter formatter, DateTime start, DateTime end)
+		{
+			_formatter = formatter;
+			DoExport(writer, start, end);
+		}
+
+		private void DoExport(IWriter writer, DateTime start, DateTime end)
+		{
+			if (_formatter == null)
+				_formatter = new QuoteFormatter();
+
+			var quotes = _quoteRepository.GetQuotes(start, end);
+			
+			foreach (var quote in quotes)
+			{
+				var data = _formatter.ToString(quote);
+				writer.Write(data);
+			}			
 		}
 	}
 }

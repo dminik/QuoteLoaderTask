@@ -1,5 +1,7 @@
 ﻿using System;
 using QuoteLoader.CSV;
+using QuoteLoader.Formatters;
+
 using Quotes;
 
 namespace QuoteLoader
@@ -7,23 +9,23 @@ namespace QuoteLoader
 	public class QuoteImporter
 	{
 		private readonly IQuoteRepository _quoteRepository;
-		private IQuoteParser _parser;
+		private IQuoteFormatter _formatter;
 				
 		public QuoteImporter(IQuoteRepository quoteRepository)
 		{
 			_quoteRepository = quoteRepository;
 		}
 
-		public IQuoteParser Parser
+		public IQuoteFormatter Formatter
 		{	        
-			set { _parser = value; }
+			set { _formatter = value; }
 		}
 
 		[Obsolete("This method is obsolete; use method public Import(ICsvReader reader) instead")]
 		public void Import(string inputFileName)
 		{
-			if(_parser == null)
-				_parser = new QuoteParser();
+			if(_formatter == null)
+				_formatter = new QuoteFormatter();
 
 			using (var csv = new CsvReader(inputFileName))
 			{		        		        
@@ -31,15 +33,15 @@ namespace QuoteLoader
 			}
 		}
 
-		public void Import(IReader reader, IQuoteParser parser)
+		public void Import(IReader reader, IQuoteFormatter formatter)
 		{
 			if(reader == null)
 				throw new ArgumentNullException("reader");
 
-			if (parser == null)
-				throw new ArgumentNullException("parser");
+			if (formatter == null)
+				throw new ArgumentNullException("formatter");
 
-			_parser = parser;
+			_formatter = formatter;
 			DoImport(reader);         
 		}
 
@@ -52,7 +54,7 @@ namespace QuoteLoader
 			{
 				lineNumber++;
 
-				var item = _parser.Parse(values, lineNumber);
+				var item = _formatter.FromString(values, lineNumber);
 				_quoteRepository.AddQuote(item);
 			}
 		}
