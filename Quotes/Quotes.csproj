@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="IQuoteRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quote2.cs" />
     <Compile Include="Quote.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

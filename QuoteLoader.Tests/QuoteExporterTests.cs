@@ -14,8 +14,8 @@ namespace QuoteLoader.Tests
 		{
 			// Arrange
 			var repository = new FakeQuoteRepository();
-			repository.AddQuote(new Quote { Id = 1, DateTime = new DateTime(2015, 8, 26, 13, 4, 32), Ticker = "ABCD", Value = 228.34 });
-			repository.AddQuote(new Quote { Id = 2, DateTime = new DateTime(2015, 8, 26, 13, 4, 33), Ticker = "QWER", Value = 228.35 });
+			repository.AddQuote(new Quote { Id = 1, DateTime = new DateTime(2015, 8, 26, 13, 4, 32), Ticker = "ABCD", ValueExact = (decimal) 228.34 });
+			repository.AddQuote(new Quote { Id = 2, DateTime = new DateTime(2015, 8, 26, 13, 4, 33), Ticker = "QWER", ValueExact = (decimal) 228.35 });
 
 			var exporter = new QuoteExporter(repository);
 

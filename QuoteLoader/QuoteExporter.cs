@@ -34,7 +34,7 @@ namespace QuoteLoader
 			{				
 				quote.DateTime.ToString("s", CultureInfo.InvariantCulture),
 				quote.Ticker,
-				quote.Value.ToString("F2", CultureInfo.InvariantCulture),
+				quote.ValueExact.ToString("F2", CultureInfo.InvariantCulture),
 			};
 
 			return data;

@@ -44,11 +44,11 @@ namespace QuoteLoader.Tests
 
 			Assert.AreEqual(new DateTime(2015, 8, 26, 13, 4, 32), repository.Data[0].DateTime);
 			Assert.AreEqual("ABCD", repository.Data[0].Ticker);
-			Assert.AreEqual((double) 228.34, repository.Data[0].Value);
+			Assert.AreEqual((double) 228.34, repository.Data[0].ValueExact);
 
 			Assert.AreEqual(new DateTime(2015, 8, 26, 13, 4, 33), repository.Data[1].DateTime);
 			Assert.AreEqual("QWER", repository.Data[1].Ticker);
-			Assert.AreEqual((double) 228.35, repository.Data[1].Value);				
+			Assert.AreEqual((double) 228.35, repository.Data[1].ValueExact);				
 		}
 
 		[Test]
