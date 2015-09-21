@@ -1,8 +1,10 @@
 ﻿using NUnit.Framework;
 using Quotes;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Moq;
 
 namespace QuoteLoader.Tests
 {
@@ -13,11 +15,16 @@ namespace QuoteLoader.Tests
 		public void Export_RealFile_Success()
 		{
 			// Arrange
-			var repository = new FakeQuoteRepository();
-			repository.AddQuote(new Quote { Id = 1, DateTime = new DateTime(2015, 8, 26, 13, 4, 32), Ticker = "ABCD", ValueExact = (decimal) 228.34 });
-			repository.AddQuote(new Quote { Id = 2, DateTime = new DateTime(2015, 8, 26, 13, 4, 33), Ticker = "QWER", ValueExact = (decimal) 228.35 });
-
-			var exporter = new QuoteExporter(repository);
+			var testQuotes = new List<Quote>()
+            {
+                new Quote { Id = 1, DateTime = new DateTime(2015, 8, 26, 13, 4, 32), Ticker = "ABCD", ValueExact = (decimal) 228.34 },
+                new Quote { Id = 2, DateTime = new DateTime(2015, 8, 26, 13, 4, 33), Ticker = "QWER", ValueExact = (decimal) 228.35 },
+            };
+			
+            var repositoryMock = new Mock<IQuoteRepository>();
+            repositoryMock.Setup(x => x.GetQuotes(It.IsAny<DateTime>(), It.IsAny<DateTime>())).Returns(testQuotes);
+            
+            var exporter = new QuoteExporter(repositoryMock.Object);
 
 			// Act
 			exporter.Export(@"..\..\SampleData\export.txt", DateTime.Now.AddDays(-1), DateTime.Now);
