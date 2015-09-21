@@ -7,7 +7,7 @@ using Quotes;
 namespace QuoteLoader.Tests
 {			
 	[TestFixture]
-	public class QuoteImporterTests
+	public class QuoteImporterTests2
 	{
         Mock<IQuoteRepository> _repositoryMock;
 
@@ -44,7 +44,6 @@ namespace QuoteLoader.Tests
 		    var importer = new QuoteImporter(_repositoryMock.Object);
 
             var parser = new Mock<IQuoteParser>();
-            parser.Setup(foo => foo.Parse())
 		    
 			// Act
             importer.Import(mockReader.Object, parser.Object);
