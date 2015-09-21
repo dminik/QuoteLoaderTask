@@ -22,5 +22,29 @@ namespace Quotes
 		}
 
 		public decimal ValueExact { get; set; }
+
+		public override bool Equals(object obj)
+		{			
+			if (obj == null)
+			{
+				return false;
+			}
+
+			Quote p = obj as Quote;
+			if ((System.Object)p == null)
+			{
+				return false;
+			}
+			
+			return (Id == p.Id) 
+				&& (Ticker == p.Ticker) 
+				&& (DateTime == p.DateTime) 
+				&& (ValueExact == p.ValueExact);
+		}
+
+		public override int GetHashCode()
+		{
+			return Id ^ (int)DateTime.Ticks ^ (int) ValueExact;
+		}
 	}
 }

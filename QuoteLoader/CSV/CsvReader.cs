@@ -25,18 +25,18 @@ namespace QuoteLoader.CSV
 			_reader = stream;
 		}
 
-        public string[] Read()
+		public string[] Read()
 		{
-            var values = new string[0];
+			var values = new string[0];
 
 			if (_reader.Peek() > -1)
 			{
 				var line = _reader.ReadLine();
 				
 				if (line != null)				
-                    values = line.Split(new string[] { _delimiter.ToString() }, StringSplitOptions.RemoveEmptyEntries);				
+					values = line.Split(new string[] { _delimiter.ToString() }, StringSplitOptions.RemoveEmptyEntries);				
 
-                return values;
+				return values;      
 			}
 			
 			return null;			
