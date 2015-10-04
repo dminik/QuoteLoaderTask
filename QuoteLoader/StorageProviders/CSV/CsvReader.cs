@@ -32,7 +32,7 @@ namespace QuoteLoader.CSV
 				var line = _reader.ReadLine();
 				
 				if (line != null)				
-					values = line.Split(_delimiter);				
+					values = line.Split(_delimiter);
 
 				return values;      
 			}

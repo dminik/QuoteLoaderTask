@@ -11,6 +11,8 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 	[TestFixture]
 	public class CsvReaderTests
 	{
+		const char DELIMETER_AS_SPACE = ' ';
+
 		[Test]
 		[ExpectedException(typeof(FileNotFoundException))]
 		public void Ctor_NoExistsFilePath_throwFileNotFoundException()
@@ -23,11 +25,18 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 		[Test]
 		public void Read_RealFile_Success()
 		{
+			// Arrange
 			using (var reader = new CsvReader(@"..\..\SampleData\quotes.txt"))
-			{
-				var values = reader.Read();				
-				Assert.IsNotNull(values);
-				Assert.IsTrue(values.Any());
+			{				
+				var lineCounter = 0;
+
+				// Act
+				while (reader.Read() != null)				
+					lineCounter++;				
+
+				// Assert
+				var LINES_IN_SAMPLE_FILE = 1000;
+				Assert.AreEqual(LINES_IN_SAMPLE_FILE, lineCounter);
 			}
 		}
 
@@ -67,8 +76,7 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 		[Test]
 		public void Read_StringWithTwoFilledFieldsAndOneEmptyField_Success()
 		{
-			// Arrange
-			const char DELIMETER_AS_SPACE = ' ';
+			// Arrange			
 			const string INPUT_STR = "123  45";
 
 			using (var inputStream = INPUT_STR.ToStream())
@@ -86,8 +94,39 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 					Assert.AreEqual("45", values[2]);									
 				}
 			}
-		}		
+		}
 
+		[Test]
+		public void Read_ExistsEmptyString_ReadEmptyString()
+		{
+			// Arrange			
+			const string INPUT_STR = "123\n\n456";
 
+			using (var stream = INPUT_STR.ToStream())
+			{
+				// Act			
+				using (var reader = new CsvReader(stream, DELIMETER_AS_SPACE))
+				{
+					// Assert
+					string[] values = null;
+					values = reader.Read();
+					Assert.IsNotNull(values);
+					Assert.AreEqual(1, values.Count());
+					Assert.AreEqual("123", values[0]);
+					
+					values = reader.Read();
+					Assert.IsNotNull(values);
+					Assert.AreEqual(1, values.Count());
+					Assert.AreEqual(string.Empty, values[0]);
+					
+					values = reader.Read();
+					Assert.IsNotNull(values);
+					Assert.AreEqual(1, values.Count());
+					Assert.AreEqual("456", values[0]);
+					
+					reader.Close();
+				}
+			}
+		}
 	}
 }

@@ -38,6 +38,9 @@ namespace QuoteLoader
 			{
 				lineNumber++;
 
+				if (string.Join(string.Empty, values).Trim() == string.Empty) // skip empty line
+					continue;
+				
 				var item = _formatter.FromString(values, lineNumber);
 				_quoteRepository.AddQuote(item);
 			}

@@ -47,6 +47,33 @@ namespace QuoteLoader.Tests.ExportersImportersFasade
 		}
 
 		[Test]
+		public void Import_TwoLinesAndEmptyLines_SkipEmptyLine()
+		{
+			// Arrange						
+			var testLinesFields = new List<string[]>()
+			{
+				new[] { "xxx" }, 
+				new[] { string.Empty },
+				new[] { " " },
+				new[] { " \t " },
+				new[] { "  " },
+				new[] { "yyy" },
+			};
+
+			var mockReader = CreateMockReader(testLinesFields);
+			var importer = new QuoteImporterBase(_repositoryMock.Object);
+
+			var formatter = new Mock<IQuoteFormatter>();
+			formatter.Setup(foo => foo.FromString(It.IsAny<string[]>(), It.IsAny<int>())).Returns(new Quote());
+
+			// Act
+			importer.Import(mockReader.Object, formatter.Object);
+
+			// Assert            
+			_repositoryMock.Verify(foo => foo.AddQuote(It.IsAny<Quote>()), Times.Exactly(2));
+		}
+
+		[Test]
 		[ExpectedException(typeof(ArgumentNullException))]
 		public void Import_ReaderParamIsNull_ThrowException()
 		{
