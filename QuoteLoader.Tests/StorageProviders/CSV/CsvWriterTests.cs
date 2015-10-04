@@ -1,10 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
-
 using NUnit.Framework;
-
 using QuoteLoader.CSV;
-using QuoteLoader.StorageProviders;
 
 namespace QuoteLoader.Tests.StorageProviders.CSV
 {
@@ -39,30 +36,6 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 			finally
 			{
 				if (File.Exists(fileName)) File.Delete(fileName);
-			}
-		}
-
-		[Test]
-		[ExpectedException(typeof(FileExistsException))]
-		public void Write_RealFileExists_ThrowException()
-		{
-			const string fileName = @"..\..\SampleData\writeToCheckExistTest.txt";
-
-			// Arrange 
-			try
-			{
-				if (!File.Exists(fileName))
-					File.WriteAllText(fileName, "testLine");
-
-				// Act
-				using(new CsvWriter(fileName))
-				{					
-				}
-			}			
-			finally
-			{
-				if (File.Exists(fileName))
-					File.Delete(fileName);
 			}
 		}
 	}

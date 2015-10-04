@@ -14,11 +14,7 @@ namespace QuoteLoader.CSV
 
 		public CsvWriter(string fileName, string delimiter = "\t")
 		{
-			_delimiter = delimiter;
-
-			if (File.Exists(fileName))
-				throw new FileExistsException(string.Format(fileName));
-						
+			_delimiter = delimiter;			
 			_writer = new StreamWriter(fileName);
 		}
 
