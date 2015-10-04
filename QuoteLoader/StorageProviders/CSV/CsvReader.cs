@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 using QuoteLoader.StorageProviders;
 
@@ -9,12 +10,16 @@ namespace QuoteLoader.CSV
 	{
 		private StreamReader _reader;
 		private bool _disposed;
-		private readonly char _delimiter;
+		private readonly char _delimiter;		
 
-		public CsvReader(string fileName, char delimiter = '\t')
+		public CsvReader(string fileName, char delimiter = '\t', Encoding encoding = null)
 		{
 			_delimiter = delimiter;
-			_reader = new StreamReader(fileName);
+			
+			if (encoding == null)
+				encoding = Encoding.UTF8;
+
+			_reader = new StreamReader(fileName, encoding);
 		}
 
 		internal CsvReader(StreamReader stream, char delimiter = '\t')
@@ -37,7 +42,7 @@ namespace QuoteLoader.CSV
 				return values;      
 			}
 			
-			return null;			
+			return null;
 		}
 
 		public void Close()

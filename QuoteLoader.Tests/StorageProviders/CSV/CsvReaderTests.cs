@@ -40,6 +40,32 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 			}
 		}
 
+		[Test]
+		public void Read_RealFileUTF8_Success()
+		{
+			// Arrange
+			using (var reader = new CsvReader(@"..\..\SampleData\quotesUTF8.txt"))
+			{				
+				// Act
+				var values = reader.Read();
+
+				// Assert
+				Assert.IsNotNull(values);
+				Assert.AreEqual(2, values.Count());
+				Assert.AreEqual("è", values[0]);
+				Assert.AreEqual("€", values[1]);
+
+				// Act
+				values = reader.Read();
+
+				// Assert
+				Assert.IsNotNull(values);
+				Assert.AreEqual(2, values.Count());
+				Assert.AreEqual("è2", values[0]);
+				Assert.AreEqual("€2", values[1]);
+			}
+		}
+
 		[Test]		
 		public void Read_TwoStringsAndTwoFields_Success()
 		{
@@ -50,6 +76,40 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 			{
 				// Act			
 				using (var reader = new CsvReader(stream, ' '))
+				{
+					// Assert
+					string[] values = null;
+					values = reader.Read();
+					Assert.IsNotNull(values);
+					Assert.AreEqual(2, values.Count());
+					Assert.AreEqual("123", values[0]);
+					Assert.AreEqual("4567", values[1]);
+
+					values = reader.Read();
+					Assert.IsNotNull(values);
+					Assert.AreEqual(2, values.Count());
+					Assert.AreEqual("abc", values[0]);
+					Assert.AreEqual("grs", values[1]);
+
+					values = reader.Read();
+					Assert.IsNull(values);
+
+					reader.Close();
+				}
+			}
+		}
+
+		[Test]
+		public void Read_TwoStringsWithSemicolonDelimeter_Success()
+		{
+			// Arrange
+			const char DELIMETER_AS_SEMICOLON = ';';
+			var str = "123;4567\nabc;grs";
+
+			using (var stream = str.ToStream())
+			{
+				// Act			
+				using (var reader = new CsvReader(stream, DELIMETER_AS_SEMICOLON))
 				{
 					// Assert
 					string[] values = null;
