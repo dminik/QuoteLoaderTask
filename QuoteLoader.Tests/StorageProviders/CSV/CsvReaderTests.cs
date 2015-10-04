@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 
 using NUnit.Framework;
@@ -186,6 +187,24 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 					
 					reader.Close();
 				}
+			}
+		}
+
+		[Test]
+		[ExpectedException(typeof(ObjectDisposedException))]
+		public void Read_ReaderDisposed_ThrowException()
+		{
+			// Arrange			
+			var str = "123 4567\n89 10";
+
+			using (var inputStream = str.ToStream())
+			{
+				// Act			
+				var inputReader = new CsvReader(inputStream);
+								
+				inputReader.Read();				
+				inputReader.Close();
+				inputReader.Read();				
 			}
 		}
 	}

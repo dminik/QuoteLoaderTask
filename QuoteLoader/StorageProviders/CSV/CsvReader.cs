@@ -30,6 +30,9 @@ namespace QuoteLoader.CSV
 
 		public string[] Read()
 		{
+			if(_disposed)
+				throw new ObjectDisposedException(typeof(CsvReader).FullName);
+
 			var values = new string[0];
 
 			if (_reader.Peek() > -1)
