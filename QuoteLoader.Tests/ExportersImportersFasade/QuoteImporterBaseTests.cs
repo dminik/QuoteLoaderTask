@@ -97,7 +97,7 @@ namespace QuoteLoader.Tests.ExportersImportersFasade
 			importer.Import(mockReader.Object, null);
 		}
 		
-		private static Mock<IReader> CreateMockReader(List<string[]> testLinesFields)
+		public static Mock<IReader> CreateMockReader(List<string[]> testLinesFields)
 		{
 			var mockReader = new Mock<IReader>();
 			var linesQueue = new Queue<string[]>();

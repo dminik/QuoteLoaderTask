@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="StorageProviders\CSV\CsvWriter.cs" />
     <Compile Include="StorageProviders\CSV\CsvReader.cs" />
+    <Compile Include="StorageProviders\FileExistsException.cs" />
     <Compile Include="StorageProviders\IWriter.cs" />
     <Compile Include="Formatters\IQuoteFormatter.cs" />
     <Compile Include="StorageProviders\IReader.cs" />

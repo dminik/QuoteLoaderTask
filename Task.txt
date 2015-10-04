@@ -3,14 +3,17 @@ Issues of CSV part (they are more in hints style):
 1.        ок Throwing FileNotFoundException is redundant. StreamReader will do that for you.
 2.        ок Using StringSplitOptions.RemoveEmptyEntries will cause incorrect  reads when there are columns with empty values(!)
 3.        ок Destructors are totally unnecessary.
-4.       Deleting the file in writer is debatable as a responsibility for the writer.
-5.       Tests are still very basic and do not check the handling of different situations:
+4.        ок Deleting the file in writer is debatable as a responsibility for the writer.
+5.		  ок Tests are still very basic and do not check the handling of different situations:
 				a.			ок Different delimiters
 				b.			ок Empty columns
 				c.			ок End of files
 				d.			ok Empty lines
 				e.			ок Special characters in column values
-				f.       Using disposed version of reader/writer
+				f.			ок Using disposed version of reader/writer
+
+
+
 
 So now we are sending you a technical task from our customer. Find it attached to the e-mail.
  

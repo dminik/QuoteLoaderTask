@@ -12,6 +12,7 @@
 *.suo
 *.tlb
 *.tlh
+*DotSettings.user
 
 *.cache
 *.ilk

@@ -16,9 +16,10 @@ namespace QuoteLoader.Tests.ExportersImportersFasade
 {
 	[TestFixture]
 	public class QuoteExporterTests
-	{
-		[Test]
-		public void Export_RealFile_Success()
+	{		
+		[TestCase(false)]
+		[TestCase(true)]
+		public void Export_RealFile_Success(bool isInjectExternalFormatter)
 		{
 			// Arrange
 			var testQuotes = new List<Quote>()
@@ -32,17 +33,32 @@ namespace QuoteLoader.Tests.ExportersImportersFasade
 			
 			var exporter = new QuoteExporter(repositoryMock.Object);
 
-			// Act
-			#pragma warning disable 618
-			exporter.Export(@"..\..\SampleData\export.txt", DateTime.Now.AddDays(-1), DateTime.Now);
-			#pragma warning restore 618
+			if (isInjectExternalFormatter)			
+				exporter.Formatter = new QuoteFormatter();			
 
-			// Assert
-			var fileLines = File.ReadAllLines(@"..\..\SampleData\export.txt");
-			Assert.AreEqual(2, fileLines.Count(), "Invalid file exported");
+			const string fileName = @"..\..\SampleData\export.txt";
+			if (File.Exists(fileName))
+				File.Delete(fileName);
 
-			Assert.AreEqual("2015-08-26T13:04:32	ABCD	228.34", fileLines[0]);
-			Assert.AreEqual("2015-08-26T13:04:33	QWER	228.35", fileLines[1]);
+			try
+			{
+				// Act				
+#pragma warning disable 618 // ignore compiler warning 'Obsolete attribute'
+				exporter.Export(fileName, DateTime.Now.AddDays(-1), DateTime.Now);
+#pragma warning restore 618
+
+				// Assert
+				var fileLines = File.ReadAllLines(fileName);
+				Assert.AreEqual(2, fileLines.Count(), "Invalid file exported");
+
+				Assert.AreEqual("2015-08-26T13:04:32	ABCD	228.34", fileLines[0]);
+				Assert.AreEqual("2015-08-26T13:04:33	QWER	228.35", fileLines[1]);
+			}
+			finally
+			{
+				if (File.Exists(fileName)) 
+					File.Delete(fileName);
+			}
 		}
 
 		[Test]

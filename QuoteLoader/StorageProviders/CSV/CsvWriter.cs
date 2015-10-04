@@ -16,8 +16,8 @@ namespace QuoteLoader.CSV
 		{
 			_delimiter = delimiter;
 
-			if (File.Exists(fileName))			
-				File.Delete(fileName);
+			if (File.Exists(fileName))
+				throw new FileExistsException(string.Format(fileName));
 						
 			_writer = new StreamWriter(fileName);
 		}
