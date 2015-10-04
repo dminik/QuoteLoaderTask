@@ -43,7 +43,7 @@
     <Compile Include="StorageProviders\IReader.cs" />
     <Compile Include="ExportersImportersFasade\QuoteExporter.cs" />
     <Compile Include="Formatters\QuoteFormatter.cs" />
-    <Compile Include="QuoteImporterBase.cs" />
+    <Compile Include="ExportersImportersFasade\QuoteImporterBase.cs" />
     <Compile Include="ExportersImportersFasade\QuoteImporter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

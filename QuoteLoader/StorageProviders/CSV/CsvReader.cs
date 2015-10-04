@@ -14,10 +14,6 @@ namespace QuoteLoader.CSV
 		public CsvReader(string fileName, char delimiter = '\t')
 		{
 			_delimiter = delimiter;
-
-			if (!File.Exists(fileName))			
-				throw new FileNotFoundException(fileName);
-						
 			_reader = new StreamReader(fileName);
 		}
 
@@ -70,11 +66,6 @@ namespace QuoteLoader.CSV
 
 				_disposed = true;
 			}
-		}
-		
-		~CsvReader()
-		{			
-			Dispose(false);
 		}
 	}
 }

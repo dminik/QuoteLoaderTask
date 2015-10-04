@@ -55,10 +55,5 @@ namespace QuoteLoader.CSV
 				_disposed = true;
 			}
 		}
-
-		~CsvWriter()
-		{			
-			Dispose(false);
-		}
 	}
 }
