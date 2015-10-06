@@ -36,8 +36,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formatters\WrongFieldsNumberException.cs" />
-    <Compile Include="Formatters\QuoteParsingException.cs" />
+    <Compile Include="Formatters\Exceptions\WrongFieldsNumberException.cs" />
+    <Compile Include="Formatters\Exceptions\QuoteParsingException.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="StorageProviders\CSV\CsvWriter.cs" />
     <Compile Include="StorageProviders\CSV\CsvReader.cs" />
