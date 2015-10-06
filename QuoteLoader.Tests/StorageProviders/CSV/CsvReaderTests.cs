@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 
 using NUnit.Framework;
@@ -13,16 +12,7 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 	public class CsvReaderTests
 	{
 		const char DELIMETER_AS_SPACE = ' ';
-
-		[Test]
-		[ExpectedException(typeof(FileNotFoundException))]
-		public void Ctor_NoExistsFilePath_throwFileNotFoundException()
-		{
-			using (var reader = new CsvReader(@"nonon.txt"))
-			{
-			}			
-		}
-
+		
 		[Test]
 		public void Read_RealFile_Success()
 		{

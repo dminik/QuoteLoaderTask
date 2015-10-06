@@ -3,11 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-using Moq;
 
 using NUnit.Framework;
 using QuoteLoader.CSV;
-using QuoteLoader.StorageProviders;
 
 namespace QuoteLoader.Tests.StorageProviders.CSV
 {
@@ -91,13 +89,13 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 				using (var streamWriter = new StreamWriter(stream))
 
 				// Act
-				using (var writer = new CsvWriter(streamWriter, DELIMETER_AS_SEMICOLON))
+				using (var writerUnderTest = new CsvWriter(streamWriter, DELIMETER_AS_SEMICOLON))
 				{
 					string[] values1 = { "qw", "er" };
-					writer.Write(values1);
+					writerUnderTest.Write(values1);
 					string[] values2 = { "ty", "ui" };
-					writer.Write(values2);
-					writer.Close();
+					writerUnderTest.Write(values2);
+					writerUnderTest.Close();
 				}
 
 				// Assert
@@ -105,6 +103,28 @@ namespace QuoteLoader.Tests.StorageProviders.CSV
 				var actualLines = Encoding.UTF8.GetString(stream.ToArray());
 				Assert.AreEqual(expectedLines, actualLines);				
 			}			
+		}
+
+		[Test]
+		[ExpectedException(typeof(ObjectDisposedException))]
+		public void Write_WriterDisposed_ThrowException()
+		{
+			// Arrange	
+			using (var stream = new MemoryStream())
+			{
+				using (var streamWriter = new StreamWriter(stream))
+				{
+					// Act
+					var writerUnderTest = new CsvWriter(streamWriter);
+
+					string[] values1 = { "qw" };
+					writerUnderTest.Write(values1);
+					writerUnderTest.Close();
+					
+					string[] values2 = { "ty" };
+					writerUnderTest.Write(values2);					
+				}
+			}	
 		}
 	}
 }
