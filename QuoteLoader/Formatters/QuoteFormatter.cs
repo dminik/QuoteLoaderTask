@@ -2,14 +2,18 @@
 using System.Globalization;
 using System.Linq;
 
+using QuoteLoader.Helpers;
+
 using Quotes;
 
 namespace QuoteLoader.Formatters
 {
 	public class QuoteFormatter : IQuoteFormatter
 	{
-		public Quote FromString(string[] values, int lineNumber)
+		public Quote FromString(string[] values, uint lineNumber)
 		{
+			values.ThrowIfNull("values");
+
 			const int FIELD_NUMBER = 3;
 
 			if (values.Count() != FIELD_NUMBER)
@@ -51,6 +55,8 @@ namespace QuoteLoader.Formatters
 
 		public string[] ToString(Quote quote)
 		{
+			quote.ThrowIfNull("quote");
+
 			var data = new string[]
 			{				
 				quote.DateTime.ToString("s", CultureInfo.InvariantCulture),

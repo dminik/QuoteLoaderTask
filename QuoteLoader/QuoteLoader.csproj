@@ -36,6 +36,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="StorageProviders\CSV\CsvWriter.cs" />
     <Compile Include="StorageProviders\CSV\CsvReader.cs" />
     <Compile Include="StorageProviders\IWriter.cs" />

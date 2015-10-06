@@ -37,7 +37,7 @@ namespace QuoteLoader.Tests.ExportersImportersFasade
 			var importer = new QuoteImporterBase(_repositoryMock.Object);
 
 			var formatter = new Mock<IQuoteFormatter>();
-			formatter.Setup(foo => foo.FromString(It.IsAny<string[]>(), It.IsAny<int>())).Returns(new Quote());
+			formatter.Setup(foo => foo.FromString(It.IsAny<string[]>(), It.IsAny<uint>())).Returns(new Quote());
 			
 			// Act
 			importer.Import(mockReader.Object, formatter.Object);
@@ -64,7 +64,7 @@ namespace QuoteLoader.Tests.ExportersImportersFasade
 			var importer = new QuoteImporterBase(_repositoryMock.Object);
 
 			var formatter = new Mock<IQuoteFormatter>();
-			formatter.Setup(foo => foo.FromString(It.IsAny<string[]>(), It.IsAny<int>())).Returns(new Quote());
+			formatter.Setup(foo => foo.FromString(It.IsAny<string[]>(), It.IsAny<uint>())).Returns(new Quote());
 
 			// Act
 			importer.Import(mockReader.Object, formatter.Object);

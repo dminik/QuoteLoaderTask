@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using QuoteLoader.Helpers;
 using QuoteLoader.StorageProviders;
 
 namespace QuoteLoader.CSV
@@ -15,6 +16,8 @@ namespace QuoteLoader.CSV
 
 		public CsvWriter(string fileName, string delimiter = "\t", bool append = true, Encoding encoding = null)
 		{
+			fileName.ThrowIfNull("fileName");
+
 			_delimiter = delimiter;
 
 			if (encoding == null)
@@ -25,12 +28,15 @@ namespace QuoteLoader.CSV
 
 		public CsvWriter(StreamWriter stream, string delimiter = "\t")
 		{
+			stream.ThrowIfNull("stream");
 			_delimiter = delimiter;
 			_writer = stream;
 		}
 
 		public void Write(string[] data)
 		{
+			data.ThrowIfNull("data");
+
 			if (_disposed)
 				throw new ObjectDisposedException(typeof(CsvReader).FullName);
 

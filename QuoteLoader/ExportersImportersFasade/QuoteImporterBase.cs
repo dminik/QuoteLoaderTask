@@ -1,6 +1,6 @@
-﻿using System;
-
+﻿
 using QuoteLoader.Formatters;
+using QuoteLoader.Helpers;
 using QuoteLoader.StorageProviders;
 
 using Quotes;
@@ -14,17 +14,15 @@ namespace QuoteLoader
 
 		public QuoteImporterBase(IQuoteRepository quoteRepository)
 		{
+			quoteRepository.ThrowIfNull("quoteRepository");
 			_quoteRepository = quoteRepository;
 		}
 		
 		public void Import(IReader reader, IQuoteFormatter formatter)
 		{
-			if(reader == null)
-				throw new ArgumentNullException("reader");
-
-			if (formatter == null)
-				throw new ArgumentNullException("formatter");
-
+			reader.ThrowIfNull("reader");
+			formatter.ThrowIfNull("formatter");
+			
 			_formatter = formatter;
 			DoImport(reader);         
 		}
@@ -32,7 +30,7 @@ namespace QuoteLoader
 		private void DoImport(IReader reader)
 		{
 			string[] values;
-			int lineNumber = 0;
+			uint lineNumber = 0;
 
 			while ((values = reader.Read()) != null)
 			{

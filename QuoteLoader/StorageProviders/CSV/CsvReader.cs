@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 
+using QuoteLoader.Helpers;
 using QuoteLoader.StorageProviders;
 
 namespace QuoteLoader.CSV
@@ -14,6 +15,8 @@ namespace QuoteLoader.CSV
 
 		public CsvReader(string fileName, char delimiter = '\t', Encoding encoding = null)
 		{
+			fileName.ThrowIfNull("fileName");
+
 			_delimiter = delimiter;
 			
 			if (encoding == null)
@@ -24,6 +27,8 @@ namespace QuoteLoader.CSV
 
 		public CsvReader(StreamReader stream, char delimiter = '\t')
 		{
+			stream.ThrowIfNull("stream");
+
 			_delimiter = delimiter;
 			_reader = stream;
 		}
