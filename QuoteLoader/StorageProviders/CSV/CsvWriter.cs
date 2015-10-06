@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 
 using QuoteLoader.StorageProviders;
 
@@ -12,14 +13,27 @@ namespace QuoteLoader.CSV
 		private bool _disposed;
 		private readonly string _delimiter;
 
-		public CsvWriter(string fileName, string delimiter = "\t")
+		public CsvWriter(string fileName, string delimiter = "\t", bool append = true, Encoding encoding = null)
 		{
-			_delimiter = delimiter;			
-			_writer = new StreamWriter(fileName);
+			_delimiter = delimiter;
+
+			if (encoding == null)
+				encoding = Encoding.UTF8;
+
+			_writer = new StreamWriter(fileName, append, encoding);
+		}
+
+		public CsvWriter(StreamWriter stream, string delimiter = "\t")
+		{
+			_delimiter = delimiter;
+			_writer = stream;
 		}
 
 		public void Write(string[] data)
 		{
+			if (_disposed)
+				throw new ObjectDisposedException(typeof(CsvReader).FullName);
+
 			var line = string.Join(_delimiter, data);
 			_writer.WriteLine(line);
 		}

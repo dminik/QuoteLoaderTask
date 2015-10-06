@@ -22,7 +22,7 @@ namespace QuoteLoader.CSV
 			_reader = new StreamReader(fileName, encoding);
 		}
 
-		internal CsvReader(StreamReader stream, char delimiter = '\t')
+		public CsvReader(StreamReader stream, char delimiter = '\t')
 		{
 			_delimiter = delimiter;
 			_reader = stream;
