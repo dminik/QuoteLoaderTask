@@ -14,40 +14,38 @@ namespace QuoteLoader.Formatters
 		{
 			values.ThrowIfNull("values");
 
-			const int FIELD_NUMBER = 3;
+			const int EXPECTED_FIELD_NUMBER = 3;
 
-			if (values.Count() != FIELD_NUMBER)
+			const int INDEX_DATETIME = 0;
+			const int INDEX_TICKER = 1;
+			const int INDEX_VALUE = 2;
+
+			if (values.Count() != EXPECTED_FIELD_NUMBER)
 			{
 				var str = string.Join(", ", values);
-				throw new FormatException(
-					string.Format(
-						"Wrong fields number in line {0}. Expected {1} but was found {2}. Fields: {3}",
-						lineNumber,
-						FIELD_NUMBER,
-						values.Count(),
-						str));
+				throw new WrongFieldsNumberException(lineNumber, EXPECTED_FIELD_NUMBER, (uint) values.Count(), str);
 			}
 
 			var quote = new Quote();
 
 			try
 			{
-				quote.DateTime = DateTime.ParseExact(values[0].Trim(), "s", CultureInfo.InvariantCulture);
+				quote.DateTime = DateTime.ParseExact(values[INDEX_DATETIME].Trim(), "s", CultureInfo.InvariantCulture);
 			}
 			catch (Exception ex)
 			{
-				throw new FormatException(string.Format("Can't parse field 'DateTime' from string '{0}' to type 'DateTime'.", values[0]), ex);
+				throw new QuoteParsingException(typeof(DateTime), values[INDEX_DATETIME], ex);
 			}
 
-			quote.Ticker = values[1];
+			quote.Ticker = values[INDEX_TICKER];
 
 			try
 			{
-				quote.ValueExact = decimal.Parse(values[2], CultureInfo.InvariantCulture);
+				quote.ValueExact = decimal.Parse(values[INDEX_VALUE], CultureInfo.InvariantCulture);
 			}
 			catch (Exception ex)
 			{
-				throw new FormatException(string.Format("Can't parse field 'Value' from string '{0}' to type 'double'.", values[2]), ex);
+				throw new QuoteParsingException(typeof(double), values[INDEX_VALUE], ex);				
 			}
 
 			return quote;

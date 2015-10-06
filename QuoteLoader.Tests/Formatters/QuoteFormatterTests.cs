@@ -57,7 +57,7 @@ namespace QuoteLoader.Tests.Formatters
 		}
 
 		[Test]
-		[ExpectedException(typeof(FormatException), ExpectedMessage = "Wrong fields number in line 1. Expected 3 but was found 2. Fields: 2015-08-26T13:04:32, ABCD")]
+		[ExpectedException(typeof(WrongFieldsNumberException), ExpectedMessage = "Wrong fields number in line 1. Expected 3 but was found 2. Fields: 2015-08-26T13:04:32, ABCD")]
 		public void FromString_WrongFieldNumber_ThrowException()
 		{			
 			// Arrange			
@@ -69,7 +69,7 @@ namespace QuoteLoader.Tests.Formatters
 		}
 
 		[Test]
-		[ExpectedException(typeof(FormatException), ExpectedMessage = "Can't parse field 'DateTime' from string '201-08-26T13:04:32' to type 'DateTime'.")]
+		[ExpectedException(typeof(QuoteParsingException), ExpectedMessage = "Can't parse a string '201-08-26T13:04:32' to type 'DateTime'.")]
 		public void FromString_WrongDateTime_ThrowException()
 		{
 			// Arrange			
@@ -81,7 +81,7 @@ namespace QuoteLoader.Tests.Formatters
 		}
 
 		[Test]
-		[ExpectedException(typeof(FormatException), ExpectedMessage = "Can't parse field 'Value' from string '228.s34' to type 'double'.")]
+		[ExpectedException(typeof(QuoteParsingException), ExpectedMessage = "Can't parse a string '228.s34' to type 'Double'.")]
 		public void FromString_WrongDoubleValue_ThrowException()
 		{
 			// Arrange			
