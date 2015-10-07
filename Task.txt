@@ -26,6 +26,11 @@ your reasoning about what was wrong with initial design and what decisions and c
 both in files that are there for annotations as well as the ones you will be adding and changing. You will need to create plenty of unit tests  to achieve high 
 code coverage.Note that your unit tests should also cover edge cases as well as check backward compatibility of the existing components.
  
-You will have 2-3 days to complete the task. We expect that finding a good  solution can take you from 6 to 10 hours. But keep in mind it can take double that time for near-perfect one. If you can’t commit enough time in that timeframe, pleasebe sure to contact us about this.We prefer to give you more time than you to rush this task and produce underdeveloped result, which may end in not showing your full potential and failing the interview.
+You will have 2-3 days to complete the task. We expect that finding a good  solution can take you from 6 to 10 hours. But keep in mind it can take double 
+that time for near-perfect one. If you can’t commit enough time in that timeframe, pleasebe sure to contact us about this.We prefer to give you more time than 
+you to rush this task and produce underdeveloped result, which may end in not showing your full potential and failing the interview.
  
-After you complete the task, you should provide us the solution for an internal review. It is very likely that we will come back to you with a list of issues that we think you should address as a part of the process. So please make sure you will be able to spend some extra time after you submit the initial version. Once the task passes our review, we will send it to the customer.The customer will do their own review, and in the case of a positive response they will schedule a live interview with you. 
+After you complete the task, you should provide us the solution for an internal review. It is very likely that we will come back to you with a 
+list of issues that we think you should address as a part of the process. So please make sure you will be able to spend some extra time after you 
+submit the initial version. Once the task passes our review, we will send it to the customer.The customer will do their own review, and in the case of 
+a positive response they will schedule a live interview with you. 

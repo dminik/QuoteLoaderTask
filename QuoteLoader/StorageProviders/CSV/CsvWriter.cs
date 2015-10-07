@@ -38,7 +38,7 @@ namespace QuoteLoader.CSV
 			data.ThrowIfNull("data");
 
 			if (_disposed)
-				throw new ObjectDisposedException(typeof(CsvReader).FullName);
+				throw new ObjectDisposedException(typeof(CsvWriter).FullName);
 
 			var line = string.Join(_delimiter, data);
 			_writer.WriteLine(line);

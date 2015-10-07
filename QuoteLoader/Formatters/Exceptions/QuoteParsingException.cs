@@ -1,8 +1,6 @@
 ﻿using System;
 
-
-
-namespace QuoteLoader.Formatters
+namespace QuoteLoader.Formatters.Exceptions
 {
 	public class QuoteParsingException : Exception
 	{

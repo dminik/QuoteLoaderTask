@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
+using QuoteLoader.Formatters.Exceptions;
 using QuoteLoader.Helpers;
 
 using Quotes;

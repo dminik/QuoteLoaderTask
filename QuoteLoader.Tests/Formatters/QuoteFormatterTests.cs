@@ -3,6 +3,7 @@
 using NUnit.Framework;
 
 using QuoteLoader.Formatters;
+using QuoteLoader.Formatters.Exceptions;
 
 using Quotes;
 
